@@ -3,6 +3,13 @@ import products from './product-data.js'
 
 const app = express()
 app.use(express.json())
+app.use((err, req, res, next) => {
+  console.error(err)
+  console.log(err.message)
+  res.status(400).json({
+    error: `You fucked up! ${err.message}`
+  })
+})
 
 const shoppingCart = {
   items: [],
